@@ -20,16 +20,12 @@ export default {
   				border: 'hsl(var(--sidebar-border))',
   				ring: 'hsl(var(--sidebar-ring))'
   			},
-  			microsoft: {
-  				blue: '#0078D4',
-  				'blue-dark': '#106EBE',
-  				'blue-light': '#00BCF2',
-  				green: '#107C10',
-  				orange: '#FF8C00',
-  				red: '#D13438',
-  				purple: '#5C2D91',
-  				gray: '#323130'
-  			}
+  			citigroup: {
+  				blue: '#003a72',
+  				red: '#db230b',
+  			},
+  			primary: '#003a72',
+  			accent: '#db230b'
   		},
   		keyframes: {
   			'accordion-down': {

@@ -2,7 +2,7 @@ import { BrowserRouter as Router, Routes, Route, Link, useLocation } from 'react
 import { ContextAwareGeneration } from './pages/ContextAwareGeneration';
 import { QAWithVerification } from './pages/QAWithVerification';
 import { AdaptiveKBManagement } from './pages/AdaptiveKBManagement';
-import { MicrosoftLogo } from './components/MicrosoftLogo';
+import { CitigroupLogo } from './components/CitigroupLogo';
 import { GitHubLink } from './components/GitHubLink';
 import { Card } from './components/ui/card';
 import { Badge } from './components/ui/badge';
@@ -20,21 +20,21 @@ function Navigation() {
       label: 'Context-Aware Generation',
       icon: Brain,
       description: 'AI-powered content generation',
-      color: 'from-blue-500 to-blue-600'
+      color: 'from-citigroup-blue to-citigroup-blue'
     },
     {
       path: '/qa-verification',
       label: 'QA with Verification',
       icon: MessageSquare,
       description: 'Multi-source verification',
-      color: 'from-green-500 to-green-600'
+      color: 'from-citigroup-red to-citigroup-red'
     },
     {
       path: '/adaptive-kb-management',
       label: 'Adaptive KB Management',
       icon: Database,
       description: 'Knowledge base curation',
-      color: 'from-purple-500 to-purple-600'
+      color: 'from-citigroup-blue to-citigroup-red'
     }
   ];
 
@@ -44,12 +44,12 @@ function Navigation() {
         {/* Top header with logo and actions */}
         <div className="flex justify-between items-center h-20">
           <div className="flex items-center space-x-4">
-            <div className="w-12 h-12 bg-gradient-to-br from-microsoft-blue to-microsoft-blue-dark rounded-xl flex items-center justify-center shadow-lg">
+            <div className="w-12 h-12 bg-gradient-to-br from-citigroup-blue to-citigroup-blue rounded-xl flex items-center justify-center shadow-lg">
               <span className="text-white font-bold text-lg">AR</span>
             </div>
             <div>
-              <h1 className="text-2xl font-bold text-microsoft-gray">Adaptive RAG Workbench</h1>
-              <Badge variant="secondary" className="bg-microsoft-blue/10 text-microsoft-blue text-xs font-medium">
+              <h1 className="text-2xl font-bold text-citigroup-blue">Adaptive RAG Workbench</h1>
+              <Badge variant="secondary" className="bg-citigroup-blue/10 text-citigroup-blue text-xs font-medium">
                 Solution Accelerator
               </Badge>
             </div>
@@ -57,7 +57,7 @@ function Navigation() {
           
           <div className="flex items-center space-x-4">
             <GitHubLink />
-            <MicrosoftLogo />
+            <CitigroupLogo />
           </div>
         </div>
         
@@ -72,20 +72,20 @@ function Navigation() {
                 <Link key={item.path} to={item.path} className="block">
                   <Card className={`p-4 transition-all duration-300 cursor-pointer border-2 group hover:shadow-lg hover:-translate-y-0.5 ${
                     active 
-                      ? 'border-microsoft-blue bg-gradient-to-br from-microsoft-blue/5 to-microsoft-blue/10 shadow-md' 
-                      : 'border-gray-200 hover:border-microsoft-blue/40 hover:bg-gray-50/50'
+                      ? 'border-citigroup-blue bg-gradient-to-br from-citigroup-blue/5 to-citigroup-blue/10 shadow-md' 
+                      : 'border-gray-200 hover:border-citigroup-blue/40 hover:bg-gray-50/50'
                   }`}>
                     <div className="flex items-center space-x-3">
                       <div className={`p-2.5 rounded-lg transition-all duration-300 ${
                         active 
                           ? `bg-gradient-to-br ${item.color} text-white shadow-md` 
-                          : 'bg-gray-100 text-gray-600 group-hover:bg-microsoft-blue/10 group-hover:text-microsoft-blue'
+                          : 'bg-gray-100 text-gray-600 group-hover:bg-citigroup-blue/10 group-hover:text-citigroup-blue'
                       }`}>
                         <Icon className="h-5 w-5" />
                       </div>
                       <div className="flex-1 min-w-0">
                         <h3 className={`font-semibold text-base mb-0.5 transition-colors ${
-                          active ? 'text-microsoft-blue' : 'text-gray-900 group-hover:text-microsoft-blue'
+                          active ? 'text-citigroup-blue' : 'text-gray-900 group-hover:text-citigroup-blue'
                         }`}>
                           {item.label}
                         </h3>
@@ -96,7 +96,7 @@ function Navigation() {
                       <div className={`transition-all duration-300 ${
                         active ? 'opacity-100' : 'opacity-0 group-hover:opacity-100'
                       }`}>
-                        <div className="w-2 h-2 bg-microsoft-blue rounded-full"></div>
+                        <div className="w-2 h-2 bg-citigroup-blue rounded-full"></div>
                       </div>
                     </div>
                   </Card>
@@ -113,7 +113,7 @@ function Navigation() {
 function App() {
   return (
     <Router>
-      <div className="min-h-screen bg-gradient-to-br from-gray-50 to-blue-50">
+      <div className="min-h-screen bg-gradient-to-br from-gray-50 to-citigroup-blue/5">
         <Navigation />
         <Routes>
           <Route path="/context-aware-generation" element={<ContextAwareGeneration />} />
