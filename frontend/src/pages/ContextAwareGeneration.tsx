@@ -7,18 +7,20 @@ import { Textarea } from '../components/ui/textarea';
 import { Card } from '../components/ui/card';
 import { Loader2, Send, RotateCcw, Lightbulb } from 'lucide-react';
 
-const ensureTimestamp = (message: any) => {
-  if (!message) {
+const ensureTimestamp = (message: unknown) => {
+  if (!message || typeof message !== 'object') {
     return {
       role: 'assistant' as const,
       content: '',
       timestamp: new Date()
     };
   }
+  
+  const msg = message as Record<string, unknown>;
   return {
-    role: message.role || 'assistant',
-    content: message.content || '',
-    timestamp: message.timestamp || new Date()
+    role: ((msg.role as string) === 'user' ? 'user' : 'assistant') as 'user' | 'assistant',
+    content: (msg.content as string) || '',
+    timestamp: (msg.timestamp as Date) || new Date()
   };
 };
 
