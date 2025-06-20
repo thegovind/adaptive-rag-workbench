@@ -3,13 +3,13 @@ import { ChatLayout } from '../components/ChatLayout';
 import { Button } from '../components/ui/button';
 import { Card } from '../components/ui/card';
 import { Badge } from '../components/ui/badge';
-import { Progress } from '../components/ui/progress';
+
 import { Upload, FileText, RefreshCw, Database, TrendingUp, Building2 } from 'lucide-react';
 
 export function AdaptiveKBManagement() {
   const [uploadStatus, setUploadStatus] = useState<string>('');
   const [isUploading, setIsUploading] = useState(false);
-  const [indexStats, setIndexStats] = useState<any>(null);
+  const [indexStats, setIndexStats] = useState<Record<string, unknown> | null>(null);
   const fileInputRef = useRef<HTMLInputElement>(null);
 
   const handleFileUpload = async (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -159,7 +159,7 @@ export function AdaptiveKBManagement() {
                       <FileText className="h-8 w-8 text-microsoft-blue" />
                       <div>
                         <div className="text-3xl font-bold text-microsoft-blue">
-                          {indexStats.total_documents?.toLocaleString() || 0}
+                          {Number(indexStats.total_documents)?.toLocaleString() || 0}
                         </div>
                         <div className="text-sm text-blue-700 font-medium">Total Documents</div>
                       </div>
@@ -171,7 +171,7 @@ export function AdaptiveKBManagement() {
                       <Building2 className="h-8 w-8 text-microsoft-green" />
                       <div>
                         <div className="text-3xl font-bold text-microsoft-green">
-                          {Object.keys(indexStats.company_breakdown || {}).length}
+                          {Object.keys((indexStats.company_breakdown as Record<string, unknown>) || {}).length}
                         </div>
                         <div className="text-sm text-green-700 font-medium">Companies Indexed</div>
                       </div>
@@ -183,7 +183,7 @@ export function AdaptiveKBManagement() {
                       <TrendingUp className="h-8 w-8 text-microsoft-purple" />
                       <div>
                         <div className="text-3xl font-bold text-microsoft-purple">
-                          {Math.round((indexStats.total_documents || 0) / Math.max(Object.keys(indexStats.company_breakdown || {}).length, 1))}
+                          {Math.round((Number(indexStats.total_documents) || 0) / Math.max(Object.keys((indexStats.company_breakdown as Record<string, unknown>) || {}).length, 1))}
                         </div>
                         <div className="text-sm text-purple-700 font-medium">Avg Docs/Company</div>
                       </div>
@@ -191,14 +191,14 @@ export function AdaptiveKBManagement() {
                   </Card>
                 </div>
 
-                {indexStats.company_breakdown && (
+                {indexStats.company_breakdown && typeof indexStats.company_breakdown === 'object' ? (
                   <Card className="p-6 bg-gray-50 border-gray-200">
                     <h4 className="font-semibold text-microsoft-gray mb-4 flex items-center">
                       <Building2 className="h-5 w-5 mr-2" />
                       Documents by Company
                     </h4>
                     <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
-                      {Object.entries(indexStats.company_breakdown).map(([company, count]) => (
+                      {Object.entries(indexStats.company_breakdown as Record<string, unknown>).map(([company, count]) => (
                         <div key={company} className="bg-white p-4 rounded-lg border border-gray-200 hover:shadow-sm transition-shadow">
                           <div className="font-semibold text-microsoft-gray">{company}</div>
                           <div className="text-sm text-gray-600 mt-1">
@@ -210,7 +210,7 @@ export function AdaptiveKBManagement() {
                       ))}
                     </div>
                   </Card>
-                )}
+                ) : null}
               </div>
             ) : (
               <div className="text-center py-8">
